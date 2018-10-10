@@ -166,6 +166,9 @@ export const ifElse = curry((predicate, doIf, doElse, x) => {
         : doElse(x)
 })
 
+export const toLower = x => x.toLowerCase()
+export const toUpper = x => x.toUpperCase()
+
 export const toBool = x => !!x
 export const toString = x => x === null || x === undefined ? '' : '' + x
 
