@@ -158,6 +158,14 @@ export const getInt = curry((idx, defaultValue, x) => {
     return toInt(defaultValue, value)
 })
 
+export const always = x => () => x
+
+export const ifElse = curry((predicate, doIf, doElse, x) => {
+    return predicate(x)
+        ? doIf(x)
+        : doElse(x)
+})
+
 export const toBool = x => !!x
 export const toString = x => x === null || x === undefined ? '' : '' + x
 
