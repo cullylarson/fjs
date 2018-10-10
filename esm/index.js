@@ -159,6 +159,7 @@ export const getInt = curry((idx, defaultValue, x) => {
 })
 
 export const toBool = x => !!x
+export const toString = x => x === null || x === undefined ? '' : '' + x
 
 export const isString = x => typeof x === 'string' || x instanceof String
 export const isObject = x => x !== null && typeof x === 'object'
