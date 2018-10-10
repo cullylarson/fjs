@@ -125,6 +125,10 @@ export const pick = curry((keys, xs) => {
         : map((defaultValue, k) => get(k, defaultValue, xs), keys)
 })
 
+export const identity = x => x
+
+export const trim = x => ('' + x).trim()
+
 // works on arrays and objects
 export const reduce = curry((f, initial, x) => {
     const reduceObj = (f, initial, obj) => {
@@ -153,6 +157,8 @@ export const getInt = curry((idx, defaultValue, x) => {
 
     return toInt(defaultValue, value)
 })
+
+export const toBool = x => !!x
 
 export const isString = x => typeof x === 'string' || x instanceof String
 export const isObject = x => x !== null && typeof x === 'object'
