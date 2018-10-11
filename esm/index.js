@@ -166,6 +166,9 @@ export const ifElse = curry((predicate, doIf, doElse, x) => {
         : doElse(x)
 })
 
+export const replace = curry((find, replace, x) => x.replace(find, replace))
+export const replaceAll = curry((find, replace, x) => x.replace(new RegExp(find, 'g'), replace))
+
 export const toLower = x => x.toLowerCase()
 export const toUpper = x => x.toUpperCase()
 
