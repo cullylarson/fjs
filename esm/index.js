@@ -166,6 +166,8 @@ export const ifElse = curry((predicate, doIf, doElse, x) => {
         : doElse(x)
 })
 
+export const split = curry((separator, x) => x.split(separator))
+export const join = curry((separator, xs) => xs.join(separator))
 export const replace = curry((find, replace, x) => x.replace(find, replace))
 export const replaceAll = curry((find, replace, x) => x.replace(new RegExp(find, 'g'), replace))
 
