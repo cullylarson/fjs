@@ -166,6 +166,20 @@ export const ifElse = curry((predicate, doIf, doElse, x) => {
         : doElse(x)
 })
 
+// Gets a set of parameters from an object. If parameters don't exist, a provided
+// default value will be used. If the parameter does exist, it will be passed through
+// the provided filter function. This is useful for getting parameters from user input
+// and ensuring that they'll at least exist before using them.
+//
+// keyDefs looks like: {key: [defaultValue, filterFunction], ...}
+export const getParams = curry((keyDefs, x) => {
+    const keyToDefaultValue = map((def) => def[0], keyDefs)
+
+    const unfilteredValues = pick(keyToDefaultValue, x)
+
+    return map((value, k) => keyDefs[k][1](value), unfilteredValues)
+})
+
 export const split = curry((separator, x) => x.split(separator))
 export const join = curry((separator, xs) => xs.join(separator))
 export const replace = curry((find, replace, x) => x.replace(find, replace))
