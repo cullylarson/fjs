@@ -47,3 +47,19 @@ test("The default value is filtered.", () => {
     expect(params.name).toBe('444')
     expect(params.name).not.toBe(444)
 })
+
+test("Throws away input parameters that aren't in the getParams definition.", () => {
+    const getData = getParams({
+        id: [10, toInt(10)],
+        name: [444, toString],
+    })
+
+    const data = {
+        id: 30,
+        hi: 'there',
+    }
+
+    const params = getData(data)
+
+    expect(params.hasOwnProperty('hi')).toBe(false)
+})
