@@ -180,6 +180,8 @@ export const getParams = curry((keyDefs, x) => {
     return map((value, k) => keyDefs[k][1](value), unfilteredValues)
 })
 
+export const values = x => Object.values(x)
+
 export const split = curry((separator, x) => x.split(separator))
 export const join = curry((separator, xs) => xs.join(separator))
 export const replace = curry((find, replace, x) => x.replace(find, replace))
