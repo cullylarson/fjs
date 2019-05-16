@@ -103,7 +103,7 @@ export const headN = curry((n, x) => x.slice(0, n))
 // get the items after the first N (not including the Nth)
 export const tailN = curry((n, x) => x.length < n ? [] : x.slice(n))
 
-// works on arrays and objects.
+// works on arrays, plain objects, objects with a map function, fantasyland Functors.
 // if x has a map member and it's a function, will use that as the map function.
 // if x is a fantasyland Functor, will use its map function.
 export const map = curry((f, x) => {
@@ -114,13 +114,11 @@ export const map = curry((f, x) => {
         }, {})
     }
 
-    return Array.isArray(x)
+    return x.map && isFunction(x.map)
         ? x.map(f)
-        : x.map && isFunction(x.map)
-            ? x.map(f)
-            : x && x['fantasy-land/map']
-                ? x['fantasy-land/map'](f)
-                : mapObj(f, x)
+        : x && x['fantasy-land/map']
+            ? x['fantasy-land/map'](f)
+            : mapObj(f, x)
 })
 
 // if xs is an array, will only get values if they're set. if xs is an object, will take key => defaultValue
