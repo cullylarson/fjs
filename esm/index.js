@@ -2,6 +2,10 @@ export function compose(...fns) {
     return fns.reduce((f, g) => (...args) => f(g(...args)))
 }
 
+export function pipe(...fns) {
+    return fns.reduce((f, g) => (...args) => g(f(...args)))
+}
+
 export function curry(f) {
     const arity = f.length
 
