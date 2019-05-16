@@ -188,6 +188,10 @@ export const getParams = curry((keyDefs, x) => {
     return map((value, k) => keyDefs[k][1](value), unfilteredValues)
 })
 
+// Takes a list of keys and an object. Will return an object that has all the original
+// keys/values except those provided.
+export const blacklist = curry((keys, x) => filter((_, k) => !keys.includes(k), x))
+
 export const values = x => Object.values(x)
 
 export const split = curry((separator, x) => x.split(separator))
