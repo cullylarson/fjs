@@ -116,8 +116,8 @@ export const map = curry((f, x) => {
     return Array.isArray(x)
         ? x.map(f)
         : x.map && isFunction(x.map)
-        ? x.map(f)
-        : mapObj(f, x)
+            ? x.map(f)
+            : mapObj(f, x)
 })
 
 // if xs is an array, will only get values if they're set. if xs is an object, will take key => defaultValue

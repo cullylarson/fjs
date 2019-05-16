@@ -1,10 +1,10 @@
-import {pipe, compose} from '../esm/'
+import {pipe} from '../esm/'
 
 test('Executes functions in the correct order', () => {
     const result = pipe(
-        x => x += 'a',
-        x => x += 'b',
-        x => x += 'c',
+        x => x + 'a',
+        x => x + 'b',
+        x => x + 'c'
     )('')
 
     expect(result).toBe('abc')

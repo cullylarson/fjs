@@ -7,11 +7,11 @@ test('Maps over arrays.', () => {
 
 test('Maps over objects.', () => {
     expect(map(x => x + 1, {a: 1, b: 2, c: 3})).toEqual({a: 2, b: 3, c: 4})
-    expect(map(x => x + 'a', {a: 'a', b: 'b', c: 'c'})).toEqual({ a: 'aa', b: 'ba', c: 'ca'})
+    expect(map(x => x + 'a', {a: 'a', b: 'b', c: 'c'})).toEqual({a: 'aa', b: 'ba', c: 'ca'})
 })
 
 test('Provides object key when over objects.', () => {
-    expect(map((v, k) => v + k, {a: 'AA', b: 'BB', c: 'CC'})).toEqual({ a: 'AAa', b: 'BBb', c: 'CCc'})
+    expect(map((v, k) => v + k, {a: 'AA', b: 'BB', c: 'CC'})).toEqual({a: 'AAa', b: 'BBb', c: 'CCc'})
 })
 
 test('Uses the object\'s own map function if available.', () => {

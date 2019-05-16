@@ -1,6 +1,6 @@
 import {getParams, toInt, toString} from '../esm/'
 
-test("Fill in parameter that doesn't exist in input.", () => {
+test('Fill in parameter that doesn\'t exist in input.', () => {
     const getData = getParams({
         id: [10, toInt(10)],
         name: ['', toString],
@@ -16,7 +16,7 @@ test("Fill in parameter that doesn't exist in input.", () => {
     })
 })
 
-test("Filters parameter that does exist in input.", () => {
+test('Filters parameter that does exist in input.', () => {
     const getData = getParams({
         id: [10, toInt(10)],
         name: ['', toString],
@@ -32,7 +32,7 @@ test("Filters parameter that does exist in input.", () => {
     expect(params.name).not.toBe(333)
 })
 
-test("The default value is filtered.", () => {
+test('The default value is filtered.', () => {
     const getData = getParams({
         id: [10, toInt(10)],
         name: [444, toString],
@@ -48,7 +48,7 @@ test("The default value is filtered.", () => {
     expect(params.name).not.toBe(444)
 })
 
-test("Throws away input parameters that aren't in the getParams definition.", () => {
+test('Throws away input parameters that aren\'t in the getParams definition.', () => {
     const getData = getParams({
         id: [10, toInt(10)],
         name: [444, toString],
