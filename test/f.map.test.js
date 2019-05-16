@@ -1,4 +1,5 @@
 import {map} from '../esm/'
+import {Right, Left} from 'sanctuary-either'
 
 test('Maps over arrays.', () => {
     expect(map(x => x + 1, [1, 2, 3])).toEqual([2, 3, 4])
@@ -20,4 +21,9 @@ test('Uses the object\'s own map function if available.', () => {
     }))('my value')
 
     expect(map(x => 'Sundays are for ' + x, mappable)).toBe('Sundays are for my value')
+})
+
+test('Maps on fantasyland functor.', () => {
+    expect(map(x => `I like ${x} with my waffles.`, Right('syrup'))).toEqual(Right('I like syrup with my waffles.'))
+    expect(map(x => `I like ${x} with my waffles.`, Left('syrup'))).toEqual(Left('syrup'))
 })

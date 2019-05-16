@@ -105,6 +105,7 @@ export const tailN = curry((n, x) => x.length < n ? [] : x.slice(n))
 
 // works on arrays and objects.
 // if x has a map member and it's a function, will use that as the map function.
+// if x is a fantasyland Functor, will use its map function.
 export const map = curry((f, x) => {
     const mapObj = (f, obj) => {
         return Object.keys(obj).reduce((acc, key) => {
@@ -117,7 +118,9 @@ export const map = curry((f, x) => {
         ? x.map(f)
         : x.map && isFunction(x.map)
             ? x.map(f)
-            : mapObj(f, x)
+            : x && x['fantasy-land/map']
+                ? x['fantasy-land/map'](f)
+                : mapObj(f, x)
 })
 
 // if xs is an array, will only get values if they're set. if xs is an object, will take key => defaultValue
