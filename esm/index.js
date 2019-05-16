@@ -103,7 +103,8 @@ export const headN = curry((n, x) => x.slice(0, n))
 // get the items after the first N (not including the Nth)
 export const tailN = curry((n, x) => x.length < n ? [] : x.slice(n))
 
-// works on arrays and objects
+// works on arrays and objects.
+// if x has a map member and it's a function, will use that as the map function.
 export const map = curry((f, x) => {
     const mapObj = (f, obj) => {
         return Object.keys(obj).reduce((acc, key) => {
@@ -113,6 +114,8 @@ export const map = curry((f, x) => {
     }
 
     return Array.isArray(x)
+        ? x.map(f)
+        : x.map && isFunction(x.map)
         ? x.map(f)
         : mapObj(f, x)
 })
