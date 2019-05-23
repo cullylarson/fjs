@@ -192,6 +192,9 @@ export const getParams = curry((keyDefs, x) => {
 // keys/values except those provided.
 export const omit = curry((keys, x) => filter((_, k) => !keys.includes(k), x))
 
+// return sthe last item in an array
+export const last = x => x.slice(-1)[0]
+
 export const values = x => Object.values(x)
 
 export const split = curry((separator, x) => x.split(separator))
