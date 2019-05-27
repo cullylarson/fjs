@@ -205,6 +205,10 @@ export const replaceAll = curry((find, replace, x) => x.replace(new RegExp(find,
 export const toLower = x => x.toLowerCase()
 export const toUpper = x => x.toUpperCase()
 
+// Tests if a value is NaN (the actual NaN object, not just "not a number")
+// NaN is the only value in JS not equal to itself
+export const isNaNResult = x => x !== x // eslint-disable-line no-self-compare
+
 export const toBool = x => !!x
 export const toString = x => x === null || x === undefined ? '' : '' + x
 
