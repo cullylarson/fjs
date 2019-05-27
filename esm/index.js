@@ -210,7 +210,7 @@ export const toUpper = x => x.toUpperCase()
 export const isNaNResult = x => x !== x // eslint-disable-line no-self-compare
 
 export const toBool = x => !!x
-export const toString = x => x === null || x === undefined ? '' : '' + x
+export const toStr = x => x === null || x === undefined || isNaNResult(x) ? '' : '' + x
 
 export const isString = x => typeof x === 'string' || x instanceof String
 export const isObject = x => x !== null && typeof x === 'object'
