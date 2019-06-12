@@ -188,6 +188,22 @@ export const getParams = curry((keyDefs, x) => {
     return map((value, k) => keyDefs[k][1](value), unfilteredValues)
 })
 
+// Only returns the value if it's in the provided set, otherwise returns the default value. case sensitive. If the provided value is an array, each value must be the validSet or it wll not be included in the result; in this case defaultValue is ignored.
+export const clampSet = curry((validSet, defaultValue, x) => {
+    if(Array.isArray(x)) {
+        return x.reduce((acc, y) => {
+            return validSet.includes(y)
+                ? [...acc, y]
+                : acc
+        }, [])
+    }
+    else {
+        return validSet.includes(x)
+            ? x
+            : defaultValue
+    }
+})
+
 // Takes a list of keys and an object. Will return an object that has all the original
 // keys/values except those provided.
 export const omit = curry((keys, x) => filter((_, k) => !keys.includes(k), x))
