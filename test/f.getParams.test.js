@@ -1,4 +1,4 @@
-import {getParams, toInt, toStr} from '../esm/'
+import {getParams, toInt, toStr, always} from '../esm/'
 
 test('Fill in parameter that doesn\'t exist in input.', () => {
     const getData = getParams({
@@ -62,4 +62,20 @@ test('Throws away input parameters that aren\'t in the getParams definition.', (
     const params = getData(data)
 
     expect(params.hasOwnProperty('hi')).toBe(false)
+})
+
+test('Can use a function as a keyDef.', () => {
+    const getData = getParams({
+        id: toInt(10),
+        name: always('A Surprise'),
+    })
+
+    const data = {
+        name: 'Aspiration',
+    }
+
+    expect(getData(data)).toEqual({
+        id: 10,
+        name: 'A Surprise',
+    })
 })

@@ -180,12 +180,15 @@ export const ifElse = curry((predicate, doIf, doElse, x) => {
 // and ensuring that they'll at least exist before using them.
 //
 // keyDefs looks like: {key: [defaultValue, filterFunction], ...}
+// Instead of an array, the keyDef values can be functions. In this case, the value
+// will just be passed to the function. If the value doesn't exist, undefined will be used
 export const getParams = curry((keyDefs, x) => {
-    const keyToDefaultValue = map((def) => def[0], keyDefs)
+    const keyDefsNormalized = map(def => Array.isArray(def) ? def : [undefined, def], keyDefs)
+    const keyToDefaultValue = map(def => def[0], keyDefsNormalized)
 
     const unfilteredValues = pick(keyToDefaultValue, x)
 
-    return map((value, k) => keyDefs[k][1](value), unfilteredValues)
+    return map((value, k) => keyDefsNormalized[k][1](value), unfilteredValues)
 })
 
 // Only returns the value if it's in the provided set, otherwise returns the default value. case sensitive. If the provided value is an array, each value must be the validSet or it wll not be included in the result; in this case defaultValue is ignored.
