@@ -235,3 +235,12 @@ export const isString = x => typeof x === 'string' || x instanceof String
 export const isObject = x => x !== null && typeof x === 'object'
 export const isFunction = x => x && {}.toString.call(x) === '[object Function]'
 export const isNumeric = x => !isNaN(parseFloat(x)) && isFinite(x)
+export const isInt = x => {
+    const xInt = parseInt(x)
+    const xNumber = Number(x)
+
+    // if x was a float, xInt and xNumber won't be equal
+    if(isNaN(xInt) || isNaN(xNumber) || xInt !== xNumber) return false
+
+    return true
+}
