@@ -244,3 +244,12 @@ export const isInt = x => {
 
     return true
 }
+
+export const toFloat = curry((defaultValue, x) => {
+    const xFloat = parseFloat(x)
+    const xNumber = Number(x) // parseFloat will turn things like '3 asdf' into 3, which we don't want
+
+    return isNaN(xFloat) || isNaN(xNumber)
+        ? defaultValue
+        : xFloat
+})
