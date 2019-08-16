@@ -151,11 +151,13 @@ export const reduce = curry((f, initial, x) => {
 })
 
 export const toInt = curry((defaultValue, x) => {
-    const val = Number.parseInt(x)
+    const xInt = parseInt(x)
+    const xNumber = Number(x) // parseInt will turn things like '3 asdf' into 3, which we don't want. Number will return NaN in those cases.
 
-    return isNaN(val)
+    // if x was a float, xInt and xNumber won't be equal
+    return isNaN(xInt) || isNaN(xNumber) || xInt !== xNumber
         ? defaultValue
-        : val
+        : xInt
 })
 
 export const getInt = curry((idx, defaultValue, x) => {
@@ -247,7 +249,7 @@ export const isInt = x => {
 
 export const toFloat = curry((defaultValue, x) => {
     const xFloat = parseFloat(x)
-    const xNumber = Number(x) // parseFloat will turn things like '3 asdf' into 3, which we don't want
+    const xNumber = Number(x) // parseFloat will turn things like '3 asdf' into 3, which we don't want. Number will return NaN in those cases.
 
     return isNaN(xFloat) || isNaN(xNumber)
         ? defaultValue
