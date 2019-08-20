@@ -16,6 +16,10 @@ test('String integer is int.', () => {
     expect(isInt('-49489410')).toBe(true)
 })
 
+test('Infinity is not int.', () => {
+    expect(isInt(Infinity)).toBe(false)
+})
+
 test('Float is not int.', () => {
     expect(isInt(3.5)).toBe(false)
     expect(isInt(34034034034.239)).toBe(false)

@@ -1,6 +1,6 @@
 import {toInt} from '../esm/'
 
-const def = Symbol()
+const def = Symbol('default-value')
 
 test('Integer parses as int.', () => {
     expect(toInt(def, 3)).toBe(3)
@@ -16,6 +16,10 @@ test('String integer parses as int.', () => {
     expect(toInt(def, '-1')).toBe(-1)
     expect(toInt(def, '-20')).toBe(-20)
     expect(toInt(def, '-49489410')).toBe(-49489410)
+})
+
+test('Infinity does not parse as int.', () => {
+    expect(toInt(def, Infinity)).toBe(def)
 })
 
 test('Float does not parse as int.', () => {

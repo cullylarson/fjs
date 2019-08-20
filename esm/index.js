@@ -150,16 +150,6 @@ export const reduce = curry((f, initial, x) => {
         : reduceObj(f, initial, x)
 })
 
-export const toInt = curry((defaultValue, x) => {
-    const xInt = parseInt(x)
-    const xNumber = Number(x) // parseInt will turn things like '3 asdf' into 3, which we don't want. Number will return NaN in those cases.
-
-    // if x was a float, xInt and xNumber won't be equal
-    return isNaN(xInt) || isNaN(xNumber) || xInt !== xNumber
-        ? defaultValue
-        : xInt
-})
-
 export const getInt = curry((idx, defaultValue, x) => {
     const value = get(idx, defaultValue, x)
 
@@ -236,10 +226,10 @@ export const toStr = x => x === null || x === undefined || isNaNResult(x) ? '' :
 export const isString = x => typeof x === 'string' || x instanceof String
 export const isObject = x => x !== null && typeof x === 'object'
 export const isFunction = x => x && {}.toString.call(x) === '[object Function]'
-export const isNumeric = x => !isNaN(parseFloat(x)) && isFinite(x)
+export const isNumeric = x => isInt(x) || isFloat(x)
 export const isInt = x => {
     const xInt = parseInt(x)
-    const xNumber = Number(x)
+    const xNumber = Number(x) // parseInt will turn things like '3 asdf' into 3, which we don't want. Number will return NaN in those cases.
 
     // if x was a float, xInt and xNumber won't be equal
     if(isNaN(xInt) || isNaN(xNumber) || xInt !== xNumber) return false
@@ -247,11 +237,15 @@ export const isInt = x => {
     return true
 }
 
-export const toFloat = curry((defaultValue, x) => {
+// does not consider Infinity to be a float
+export const isFloat = x => {
     const xFloat = parseFloat(x)
     const xNumber = Number(x) // parseFloat will turn things like '3 asdf' into 3, which we don't want. Number will return NaN in those cases.
 
-    return isNaN(xFloat) || isNaN(xNumber)
-        ? defaultValue
-        : xFloat
-})
+    if(isNaN(xFloat) || isNaN(xNumber) || !isFinite(xFloat)) return false
+
+    return true
+}
+
+export const toInt = curry((defaultValue, x) => isInt(x) ? parseInt(x) : defaultValue)
+export const toFloat = curry((defaultValue, x) => isFloat(x) ? parseFloat(x) : defaultValue)

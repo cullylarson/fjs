@@ -1,6 +1,6 @@
 import {toFloat} from '../esm/'
 
-const def = Symbol()
+const def = Symbol('default-value')
 
 test('Integers parse as float.', () => {
     expect(toFloat(def, 3)).toBe(3)
@@ -16,6 +16,10 @@ test('String integer parse as float.', () => {
     expect(toFloat(def, '-1')).toBe(-1)
     expect(toFloat(def, '-20')).toBe(-20)
     expect(toFloat(def, '-49489410')).toBe(-49489410)
+})
+
+test('Infinity does not parse as float.', () => {
+    expect(toFloat(def, Infinity)).toBe(def)
 })
 
 test('Float parse as float.', () => {
