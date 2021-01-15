@@ -171,9 +171,12 @@ export const ifElse = curry((predicate, doIf, doElse, x) => {
 // the provided filter function. This is useful for getting parameters from user input
 // and ensuring that they'll at least exist before using them.
 //
+// A value is always passed to the filter function. If the parameter doesn't exist,
+// the deafult value will be passed instead. This can sometimes create unexpected behavior.
+//
 // keyDefs looks like: {key: [defaultValue, filterFunction], ...}
 // Instead of an array, the keyDef values can be functions. In this case, the value
-// will just be passed to the function. If the value doesn't exist, undefined will be used
+// will just be passed to the function. If the value doesn't exist, undefined will be passed to the filter function.
 export const getParams = curry((keyDefs, x) => {
     const keyDefsNormalized = map(def => Array.isArray(def) ? def : [undefined, def], keyDefs)
     const keyToDefaultValue = map(def => def[0], keyDefsNormalized)

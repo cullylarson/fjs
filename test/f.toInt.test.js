@@ -50,4 +50,6 @@ test('Non-numeric string does not parse as int.', () => {
     expect(toInt(def, 'two')).toBe(def)
     expect(toInt(def, 'five')).toBe(def)
     expect(toInt(def, 'five')).toBe(def)
+    expect(toInt(def, null)).toBe(def)
+    expect(toInt(def, undefined)).toBe(def)
 })
